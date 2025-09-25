@@ -1,0 +1,30 @@
+<h1>All Movies</h1>
+
+<%= link_to 'Add Movie', new_movie_path, :class => 'btn btn-primary' %>
+
+<div id="movies">
+  <div class="row">
+    <div class="col-8 #{'bg-warning bg-opacity-25' if @sort_col == 'title'}">
+      <%= link_to "Movie Title #{@sort_col == 'title' ? (@sort_dir == 'asc' ? '↑' : '↓') : ''}",
+                  movies_path(sort: 'title', dir: (@sort_col == 'title' && @sort_dir == 'asc') ? 'desc' : 'asc'),
+                  class: "text-decoration-none text-dark #{'fw-bold' if @sort_col == 'title'}" %>
+    </div>
+    <div class="col-2 #{'bg-warning bg-opacity-25' if @sort_col == 'rating'}">
+      <%= link_to "Rating #{@sort_col == 'rating' ? (@sort_dir == 'asc' ? '↑' : '↓') : ''}",
+                  movies_path(sort: 'rating', dir: (@sort_col == 'rating' && @sort_dir == 'asc') ? 'desc' : 'asc'),
+                  class: "text-decoration-none text-dark #{'fw-bold' if @sort_col == 'rating'}" %>
+    </div>
+    <div class="col-2 #{'bg-warning bg-opacity-25' if @sort_col == 'release_date'}">
+      <%= link_to "Release Date #{@sort_col == 'release_date' ? (@sort_dir == 'asc' ? '↑' : '↓') : ''}",
+                  movies_path(sort: 'release_date', dir: (@sort_col == 'release_date' && @sort_dir == 'asc') ? 'desc' : 'asc'),
+                  class: "text-decoration-none text-dark #{'fw-bold' if @sort_col == 'release_date'}" %>
+    </div>
+  </div>
+  <%- @movies.each do |movie| %>
+    <div class="row">
+      <div class="col-8"><%= link_to movie.title, movie_path(movie) %></div>
+      <div class="col-2"><%= movie.rating %></div>
+      <div class="col-2"><%= link_to movie.release_date.strftime('%F'), movie_path(movie) %></div>
+    </div>
+  <% end %>
+</div>

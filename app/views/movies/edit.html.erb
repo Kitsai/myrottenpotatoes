@@ -1,0 +1,18 @@
+<h2>Edit Movie</h2>
+<%= form_tag movie_path(@movie), :method => :put, :class => 'form' do %>
+  <%= label :movie, :title, 'Title' %>
+  <%= text_field :movie, :title, :value => @movie.title, :class => 'form-control' %>
+
+  <%= label :movie, :rating, 'Rating' %>
+  <%= select :movie, :rating, ['G', 'PG', 'PG-13', 'R', 'NC-17'],
+      {:selected => @movie.rating}, {:class => 'form-control'} %>
+
+  <%= label :movie, :release_date, 'Released On' %>
+  <%= date_select :movie, :release_date,
+      {:selected => @movie.release_date}, {:class => 'form-control'} %>
+
+  <%= submit_tag 'Update Movie' %>
+<% end %>
+
+<%= link_to 'Show', movie_path(@movie), :class => 'btn' %>
+<%= link_to 'Back to movie list', movies_path, :class => 'btn btn-primary' %>
